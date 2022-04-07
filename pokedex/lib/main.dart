@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/presentation/ui/ui.dart';
 
-import 'presentation/pokemon/home_screen.dart';
+import 'presentation/pokemon/ui/home_screen.dart';
 
 void main() {
   runApp(const Pokedex());
