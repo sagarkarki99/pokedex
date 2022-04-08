@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/presentation/pokemon/ui/widgets/widgets.dart';
-import 'package:pokedex/presentation/ui/ui.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+
+import '../../ui/ui.dart';
+import 'widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,28 +24,27 @@ class HomeScreen extends StatelessWidget {
               AppTitle(),
             ],
           ),
-          bottom: TabBar(
-            labelStyle: Theme.of(context).textTheme.headline6,
-            labelColor: AppColors.primaryDark,
-            unselectedLabelColor: AppColors.darkLight,
-            indicator: MaterialIndicator(
-              color: AppColors.primary,
-              paintingStyle: PaintingStyle.fill,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(52),
+            child: TabBar(
+              labelStyle: Theme.of(context).textTheme.headline6,
+              labelColor: AppColors.primaryDark,
+              unselectedLabelColor: AppColors.darkLight,
+              indicator: MaterialIndicator(
+                color: AppColors.primary,
+                paintingStyle: PaintingStyle.fill,
+              ),
+              tabs: const [
+                Tab(child: AllPokemonTab()),
+                Tab(child: FavouritesTab()),
+              ],
             ),
-            tabs: const [
-              Tab(child: AllPokemonTab()),
-              Tab(child: FavouritesTab()),
-            ],
           ),
         ),
         body: const TabBarView(
           children: [
-            Center(
-              child: PokeIcon(),
-            ),
-            Center(
-              child: PokeIcon(),
-            ),
+            AllPokemonSection(),
+            FavouritesSection(),
           ],
         ),
       ),

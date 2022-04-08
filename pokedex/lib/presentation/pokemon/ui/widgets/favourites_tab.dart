@@ -10,7 +10,7 @@ class FavouritesTab extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        const Text(
           'Favourites',
         ),
         const SizedBox(width: 4.0),
