@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/presentation/pokemon_detail/ui/pokemon_detail_screen.dart';
 import 'package:pokedex/presentation/ui/ui.dart';
 import 'package:pokedex/presentation/view_models/pokemon_view_model.dart';
 
@@ -22,7 +23,12 @@ class PokemonList extends StatelessWidget {
       itemBuilder: (context, index) => PokemonItem(
         model: pokemons[index],
         onTap: (model) {
-          print(model);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PokemonDetailScreen(),
+            ),
+          );
         },
       ),
     );

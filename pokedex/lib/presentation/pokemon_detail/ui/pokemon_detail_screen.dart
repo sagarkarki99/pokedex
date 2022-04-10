@@ -1,10 +1,52 @@
 import 'package:flutter/material.dart';
 
+import '../../ui/ui.dart';
+import '../view_model/pokemon_detail_view_model.dart';
+import 'widgets/widgets.dart';
+
 class PokemonDetailScreen extends StatelessWidget {
   const PokemonDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          const DetailAppBar(),
+          SliverToBoxAdapter(
+            child: PrimaryStats(model: PokemonDetailViewModel()),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+          const SliverToBoxAdapter(child: _TitleBox('Base stats')),
+          const SliverToBoxAdapter(child: SizedBox(height: 1.0)),
+          SliverToBoxAdapter(
+            child: BaseStats(
+              model: PokemonDetailViewModel(),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FavouriteButton(onPressed: () {}),
+    );
+  }
+}
+
+class _TitleBox extends StatelessWidget {
+  final String title;
+  const _TitleBox(this.title, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.light,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      child: Text(
+        title,
+        style: Theme.of(context)
+            .textTheme
+            .headline6!
+            .copyWith(fontWeight: FontWeight.w600),
+      ),
+    );
   }
 }
