@@ -6,7 +6,38 @@ import '../ui.dart';
 
 class PokemonItem extends StatelessWidget {
   final PokemonViewModel model;
+  final Function(PokemonViewModel model)? onTap;
   const PokemonItem({
+    Key? key,
+    required this.model,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap == null ? null : () => onTap!(model),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.light,
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PokemonSvg(model: model),
+            _Description(model: model),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PokemonSvg extends StatelessWidget {
+  final PokemonViewModel model;
+  const PokemonSvg({
     Key? key,
     required this.model,
   }) : super(key: key);
@@ -14,36 +45,9 @@ class PokemonItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 110,
-      decoration: BoxDecoration(
-        color: AppColors.light,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PokemonSvg(model.svgUrl),
-          _Description(model: model),
-        ],
-      ),
-    );
-  }
-}
-
-class PokemonSvg extends StatelessWidget {
-  final String url;
-  const PokemonSvg(
-    this.url, {
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.primaryLight,
+      color: model.bgColor,
       child: SvgPicture.network(
-        url,
+        model.svgUrl,
         fit: BoxFit.contain,
       ),
     );

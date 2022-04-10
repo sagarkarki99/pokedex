@@ -23,13 +23,15 @@ class _$PokemonViewModelTearOff {
       required String idString,
       required String name,
       required String power,
-      required String svgUrl}) {
+      required String svgUrl,
+      Color bgColor = AppColors.waterBackground}) {
     return _PokemonViewModel(
       id: id,
       idString: idString,
       name: name,
       power: power,
       svgUrl: svgUrl,
+      bgColor: bgColor,
     );
   }
 }
@@ -44,6 +46,7 @@ mixin _$PokemonViewModel {
   String get name => throw _privateConstructorUsedError;
   String get power => throw _privateConstructorUsedError;
   String get svgUrl => throw _privateConstructorUsedError;
+  Color get bgColor => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PokemonViewModelCopyWith<PokemonViewModel> get copyWith =>
@@ -56,7 +59,12 @@ abstract class $PokemonViewModelCopyWith<$Res> {
           PokemonViewModel value, $Res Function(PokemonViewModel) then) =
       _$PokemonViewModelCopyWithImpl<$Res>;
   $Res call(
-      {int id, String idString, String name, String power, String svgUrl});
+      {int id,
+      String idString,
+      String name,
+      String power,
+      String svgUrl,
+      Color bgColor});
 }
 
 /// @nodoc
@@ -75,6 +83,7 @@ class _$PokemonViewModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? power = freezed,
     Object? svgUrl = freezed,
+    Object? bgColor = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -97,6 +106,10 @@ class _$PokemonViewModelCopyWithImpl<$Res>
           ? _value.svgUrl
           : svgUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      bgColor: bgColor == freezed
+          ? _value.bgColor
+          : bgColor // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -109,7 +122,12 @@ abstract class _$PokemonViewModelCopyWith<$Res>
       __$PokemonViewModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id, String idString, String name, String power, String svgUrl});
+      {int id,
+      String idString,
+      String name,
+      String power,
+      String svgUrl,
+      Color bgColor});
 }
 
 /// @nodoc
@@ -130,6 +148,7 @@ class __$PokemonViewModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? power = freezed,
     Object? svgUrl = freezed,
+    Object? bgColor = freezed,
   }) {
     return _then(_PokemonViewModel(
       id: id == freezed
@@ -152,6 +171,10 @@ class __$PokemonViewModelCopyWithImpl<$Res>
           ? _value.svgUrl
           : svgUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      bgColor: bgColor == freezed
+          ? _value.bgColor
+          : bgColor // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -159,12 +182,13 @@ class __$PokemonViewModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PokemonViewModel implements _PokemonViewModel {
-  const _$_PokemonViewModel(
+  _$_PokemonViewModel(
       {required this.id,
       required this.idString,
       required this.name,
       required this.power,
-      required this.svgUrl});
+      required this.svgUrl,
+      this.bgColor = AppColors.waterBackground});
 
   @override
   final int id;
@@ -176,10 +200,13 @@ class _$_PokemonViewModel implements _PokemonViewModel {
   final String power;
   @override
   final String svgUrl;
+  @JsonKey()
+  @override
+  final Color bgColor;
 
   @override
   String toString() {
-    return 'PokemonViewModel(id: $id, idString: $idString, name: $name, power: $power, svgUrl: $svgUrl)';
+    return 'PokemonViewModel(id: $id, idString: $idString, name: $name, power: $power, svgUrl: $svgUrl, bgColor: $bgColor)';
   }
 
   @override
@@ -191,7 +218,8 @@ class _$_PokemonViewModel implements _PokemonViewModel {
             const DeepCollectionEquality().equals(other.idString, idString) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.power, power) &&
-            const DeepCollectionEquality().equals(other.svgUrl, svgUrl));
+            const DeepCollectionEquality().equals(other.svgUrl, svgUrl) &&
+            const DeepCollectionEquality().equals(other.bgColor, bgColor));
   }
 
   @override
@@ -201,7 +229,8 @@ class _$_PokemonViewModel implements _PokemonViewModel {
       const DeepCollectionEquality().hash(idString),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(power),
-      const DeepCollectionEquality().hash(svgUrl));
+      const DeepCollectionEquality().hash(svgUrl),
+      const DeepCollectionEquality().hash(bgColor));
 
   @JsonKey(ignore: true)
   @override
@@ -210,12 +239,13 @@ class _$_PokemonViewModel implements _PokemonViewModel {
 }
 
 abstract class _PokemonViewModel implements PokemonViewModel {
-  const factory _PokemonViewModel(
+  factory _PokemonViewModel(
       {required int id,
       required String idString,
       required String name,
       required String power,
-      required String svgUrl}) = _$_PokemonViewModel;
+      required String svgUrl,
+      Color bgColor}) = _$_PokemonViewModel;
 
   @override
   int get id;
@@ -227,6 +257,8 @@ abstract class _PokemonViewModel implements PokemonViewModel {
   String get power;
   @override
   String get svgUrl;
+  @override
+  Color get bgColor;
   @override
   @JsonKey(ignore: true)
   _$PokemonViewModelCopyWith<_PokemonViewModel> get copyWith =>
