@@ -35,7 +35,9 @@ class DetailAppBar extends StatelessWidget {
               color: AppColors.fireBackground,
               alignment: Alignment.bottomRight,
               child: SvgPicture.network(
-                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/132.svg',
+                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
+                height: 125,
+                width: 136,
               ),
             ),
             Positioned(
