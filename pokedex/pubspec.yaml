@@ -14,8 +14,11 @@ dependencies:
   dio: ^4.0.6
   flutter_bloc: ^8.0.1
   json_annotation: ^4.4.0
-
+  freezed_annotation: ^1.1.0
+  sqflite: ^2.0.2
   cupertino_icons: ^1.0.2
+  extended_image: ^6.0.2+1
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +29,7 @@ dev_dependencies:
   flutter_svg: ^1.0.3
   badges: ^2.0.2
   tab_indicator_styler: ^2.0.0
+  lint: ^1.5.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

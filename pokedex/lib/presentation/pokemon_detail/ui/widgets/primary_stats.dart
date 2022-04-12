@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/presentation/pokemon_detail/view_model/pokemon_detail_view_model.dart';
-import 'package:pokedex/presentation/ui/ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../pokemon/cubit/pokemon_cubit.dart';
+import '../../../ui/ui.dart';
 
 class PrimaryStats extends StatelessWidget {
-  final PokemonDetailViewModel model;
   const PrimaryStats({
     Key? key,
-    required this.model,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-      color: AppColors.light,
-      child: Wrap(
-        spacing: 48,
-        children: const [
-          _Stat(title: 'Height', value: '69'),
-          _Stat(title: 'Weight', value: '7'),
-          _Stat(title: 'BMI', value: '14.7'),
-        ],
+    return BlocBuilder<PokemonCubit, PokemonState>(
+      builder: (context, state) => state.maybeWhen(
+        orElse: () => const SizedBox(),
+        loaded: (pokemon) => Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          color: AppColors.light,
+          child: Wrap(
+            spacing: 48,
+            children: [
+              _Stat(title: 'Height', value: pokemon.height.toString()),
+              _Stat(title: 'Weight', value: pokemon.weight.toString()),
+              _Stat(title: 'BMI', value: pokemon.bmi),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -1,42 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/presentation/pokemon_detail/view_model/pokemon_detail_view_model.dart';
-import 'package:pokedex/presentation/ui/ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../pokemon/cubit/pokemon_cubit.dart';
+import '../../../ui/ui.dart';
 
 class BaseStats extends StatelessWidget {
-  final PokemonDetailViewModel model;
-
   const BaseStats({
     Key? key,
-    required this.model,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      color: AppColors.light,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          _Stats(title: 'Hp', value: 54),
-          _Stats(title: 'Attack', value: 80),
-          _Stats(title: 'Defense', value: 70),
-          _Stats(title: 'Defense', value: 70),
-          _Stats(title: 'Defense', value: 70),
-          _Stats(title: 'Defense', value: 70),
-          _Stats(
-            title: 'Special Attack',
-            value: 60,
-            color: AppColors.yellowish,
+    return BlocBuilder<PokemonCubit, PokemonState>(
+      builder: (context, state) => state.maybeWhen(
+        orElse: () => const SizedBox(),
+        loaded: (viewModel) => Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          color: AppColors.light,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _Stats(title: 'Hp', value: viewModel.hp),
+              _Stats(title: 'Attack', value: viewModel.attack),
+              _Stats(title: 'Defense', value: viewModel.defense),
+              _Stats(
+                title: 'Special Attack',
+                value: viewModel.specialAttack,
+                color: AppColors.yellowish,
+              ),
+              _Stats(
+                title: 'Special Defence',
+                value: viewModel.specialDefense,
+                color: AppColors.yellowish,
+              ),
+              _Stats(title: 'Speed', value: viewModel.speed),
+              _Stats(title: 'Avg. Power', value: viewModel.avgPower),
+            ],
           ),
-          _Stats(
-            title: 'Special Defence',
-            value: 40,
-            color: AppColors.yellowish,
-          ),
-          _Stats(title: 'Speed', value: 70),
-          _Stats(title: 'Avg. Power', value: 10),
-        ],
+        ),
       ),
     );
   }

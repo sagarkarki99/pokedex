@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../ui/ui.dart';
-import '../view_model/pokemon_detail_view_model.dart';
 import 'widgets/widgets.dart';
 
 class PokemonDetailScreen extends StatelessWidget {
@@ -10,19 +9,17 @@ class PokemonDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
+      body: const CustomScrollView(
         slivers: [
-          const DetailAppBar(),
+          DetailAppBar(),
           SliverToBoxAdapter(
-            child: PrimaryStats(model: PokemonDetailViewModel()),
+            child: PrimaryStats(),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
-          const SliverToBoxAdapter(child: _TitleBox('Base stats')),
-          const SliverToBoxAdapter(child: SizedBox(height: 1.0)),
+          SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+          SliverToBoxAdapter(child: _TitleBox('Base stats')),
+          SliverToBoxAdapter(child: SizedBox(height: 1.0)),
           SliverToBoxAdapter(
-            child: BaseStats(
-              model: PokemonDetailViewModel(),
-            ),
+            child: BaseStats(),
           ),
         ],
       ),
