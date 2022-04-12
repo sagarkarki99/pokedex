@@ -13,6 +13,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   static const String baseUrl = 'https://pokeapi.co/api/v2/';
   late Box favouritesBox;
   final Dio dio;
+  List<Function> favouriteListeners = [];
 
   PokemonRepositoryImpl({
     required this.dio,
@@ -56,7 +57,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
     if (favouritesBox.isEmpty) return Future.value([]);
     return Future.value((favouritesBox.values)
         .map((json) => Pokemon(
-              id: json["id"],
+              id: json["id"] as int,
               name: json['name'],
               height: json['height'],
               weight: json['weight'],
@@ -79,16 +80,26 @@ class PokemonRepositoryImpl implements PokemonRepository {
     final newPokemon = pokemon.copyWith(isFavourite: true);
     final pokemonJson = newPokemon.toJson();
     favouritesBox.put(newPokemon.detailUrl, pokemonJson.toString());
+    _notifyListeners(newPokemon);
     return newPokemon;
   }
 
   @override
   Future<Pokemon> removeFromFavourite(Pokemon pokemon) async {
     await favouritesBox.delete(pokemon.detailUrl);
-    return pokemon.copyWith(isFavourite: false);
+    final newPokemon = pokemon.copyWith(isFavourite: false);
+    _notifyListeners(newPokemon);
+    return newPokemon;
   }
-}
 
-class _Endpoints {
-  static const allPokemons = 'pokemon/';
+  @override
+  void addFavouriteListener(Function(Pokemon p1) onListen) {
+    favouriteListeners.add(onListen);
+  }
+
+  void _notifyListeners(Pokemon newPokemon) {
+    for (var fn in favouriteListeners) {
+      fn(newPokemon);
+    }
+  }
 }

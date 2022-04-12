@@ -1,51 +1,14 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../pokemon_detail/ui/pokemon_detail_screen.dart';
-import '../../ui/ui.dart';
+import '../ui.dart';
 import '../../view_models/pokemon_view_model.dart';
-import '../cubit/pokemon_cubit.dart';
 
 class PokemonItem extends StatelessWidget {
-  const PokemonItem({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PokemonCubit, PokemonState>(
-      builder: (context, state) => state.when(
-        loading: () => const ShimmerLoadingItem(),
-        loaded: (pokemon) => _PokemonItemBody(
-          model: PokemonViewModel(
-            name: pokemon.name,
-            power: pokemon.type,
-            idString: pokemon.id.toString(),
-            svgUrl: pokemon.svgUrl,
-            id: pokemon.id,
-            bgColor: pokemon.getBgColor(),
-          ),
-          onTap: (model) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                  value: context.read<PokemonCubit>(),
-                  child: const PokemonDetailScreen(),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class _PokemonItemBody extends StatelessWidget {
   final PokemonViewModel model;
   final Function(PokemonViewModel model)? onTap;
-  const _PokemonItemBody({
+  const PokemonItem({
     Key? key,
     required this.model,
     this.onTap,

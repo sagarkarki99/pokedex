@@ -1,16 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/presentation/pokemon/cubit/pokemon_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/core/di/di.dart';
+import 'package:pokedex/data/pokemon_repository.dart';
+
+import '../../../data/models/pokemon.dart';
 import '../../ui/ui.dart';
+import '../cubit/pokemon_detail_cubit.dart';
 import 'widgets/widgets.dart';
 
 class PokemonDetailScreen extends StatelessWidget {
-  const PokemonDetailScreen({Key? key}) : super(key: key);
+  final Pokemon pokemon;
+  const PokemonDetailScreen({
+    Key? key,
+    required this.pokemon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const CustomScrollView(
+    return BlocProvider(
+      create: (context) => PokemonDetailCubit(
+        pokemon: pokemon,
+        pokemonRepository: locator<PokemonRepository>(),
+      )..setUpViewModel(),
+      child: const _PokemonDetailBody(),
+    );
+  }
+}
+
+class _PokemonDetailBody extends StatelessWidget {
+  const _PokemonDetailBody({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: CustomScrollView(
         slivers: [
           DetailAppBar(),
           SliverToBoxAdapter(
@@ -24,9 +49,7 @@ class PokemonDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FavouriteButton(
-        onPressed: context.read<PokemonCubit>().toggleFavourite,
-      ),
+      floatingActionButton: FavouriteButton(),
     );
   }
 }

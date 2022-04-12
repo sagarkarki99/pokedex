@@ -19,7 +19,7 @@ class _$PokemonListStateTearOff {
   const _$PokemonListStateTearOff();
 
   _PokemonListState call(
-      {List<Poke> pokemons = const [],
+      {List<Pokemon> pokemons = const [],
       bool hasReachedMax = false,
       StateStatus status = const StateStatus.loading()}) {
     return _PokemonListState(
@@ -35,7 +35,7 @@ const $PokemonListState = _$PokemonListStateTearOff();
 
 /// @nodoc
 mixin _$PokemonListState {
-  List<Poke> get pokemons => throw _privateConstructorUsedError;
+  List<Pokemon> get pokemons => throw _privateConstructorUsedError;
   bool get hasReachedMax => throw _privateConstructorUsedError;
   StateStatus get status => throw _privateConstructorUsedError;
 
@@ -49,7 +49,7 @@ abstract class $PokemonListStateCopyWith<$Res> {
   factory $PokemonListStateCopyWith(
           PokemonListState value, $Res Function(PokemonListState) then) =
       _$PokemonListStateCopyWithImpl<$Res>;
-  $Res call({List<Poke> pokemons, bool hasReachedMax, StateStatus status});
+  $Res call({List<Pokemon> pokemons, bool hasReachedMax, StateStatus status});
 
   $StateStatusCopyWith<$Res> get status;
 }
@@ -73,7 +73,7 @@ class _$PokemonListStateCopyWithImpl<$Res>
       pokemons: pokemons == freezed
           ? _value.pokemons
           : pokemons // ignore: cast_nullable_to_non_nullable
-              as List<Poke>,
+              as List<Pokemon>,
       hasReachedMax: hasReachedMax == freezed
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$PokemonListStateCopyWith<$Res>
           _PokemonListState value, $Res Function(_PokemonListState) then) =
       __$PokemonListStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Poke> pokemons, bool hasReachedMax, StateStatus status});
+  $Res call({List<Pokemon> pokemons, bool hasReachedMax, StateStatus status});
 
   @override
   $StateStatusCopyWith<$Res> get status;
@@ -127,7 +127,7 @@ class __$PokemonListStateCopyWithImpl<$Res>
       pokemons: pokemons == freezed
           ? _value.pokemons
           : pokemons // ignore: cast_nullable_to_non_nullable
-              as List<Poke>,
+              as List<Pokemon>,
       hasReachedMax: hasReachedMax == freezed
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -150,7 +150,7 @@ class _$_PokemonListState implements _PokemonListState {
 
   @JsonKey()
   @override
-  final List<Poke> pokemons;
+  final List<Pokemon> pokemons;
   @JsonKey()
   @override
   final bool hasReachedMax;
@@ -189,12 +189,12 @@ class _$_PokemonListState implements _PokemonListState {
 
 abstract class _PokemonListState implements PokemonListState {
   const factory _PokemonListState(
-      {List<Poke> pokemons,
+      {List<Pokemon> pokemons,
       bool hasReachedMax,
       StateStatus status}) = _$_PokemonListState;
 
   @override
-  List<Poke> get pokemons;
+  List<Pokemon> get pokemons;
   @override
   bool get hasReachedMax;
   @override

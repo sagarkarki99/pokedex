@@ -16,6 +16,18 @@ extension BgColor on PokemonDetailViewModel {
   }
 }
 
+extension BgColorPokemon on Pokemon {
+  Color getBgColor() {
+    if (types.contains('fire')) {
+      return AppColors.fireBackground;
+    } else if (types.contains('grass')) {
+      return AppColors.grassBackground;
+    } else {
+      return AppColors.waterBackground;
+    }
+  }
+}
+
 extension ViewModel on Pokemon {
   PokemonDetailViewModel get toViewModel {
     return PokemonDetailViewModel(

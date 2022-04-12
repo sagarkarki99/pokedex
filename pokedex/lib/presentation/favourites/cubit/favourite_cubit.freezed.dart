@@ -22,7 +22,7 @@ class _$FavouriteStateTearOff {
     return const Initial();
   }
 
-  Loaded loaded(List<Poke> pokes) {
+  Loaded loaded(List<Pokemon> pokes) {
     return Loaded(
       pokes,
     );
@@ -41,21 +41,21 @@ mixin _$FavouriteState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Poke> pokes) loaded,
+    required TResult Function(List<Pokemon> pokes) loaded,
     required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
     required TResult orElse(),
   }) =>
@@ -140,7 +140,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Poke> pokes) loaded,
+    required TResult Function(List<Pokemon> pokes) loaded,
     required TResult Function() empty,
   }) {
     return initial();
@@ -150,7 +150,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
   }) {
     return initial?.call();
@@ -160,7 +160,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -213,7 +213,7 @@ abstract class Initial implements FavouriteState {
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Poke> pokes});
+  $Res call({List<Pokemon> pokes});
 }
 
 /// @nodoc
@@ -233,7 +233,7 @@ class _$LoadedCopyWithImpl<$Res> extends _$FavouriteStateCopyWithImpl<$Res>
       pokes == freezed
           ? _value.pokes
           : pokes // ignore: cast_nullable_to_non_nullable
-              as List<Poke>,
+              as List<Pokemon>,
     ));
   }
 }
@@ -244,7 +244,7 @@ class _$Loaded implements Loaded {
   const _$Loaded(this.pokes);
 
   @override
-  final List<Poke> pokes;
+  final List<Pokemon> pokes;
 
   @override
   String toString() {
@@ -272,7 +272,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Poke> pokes) loaded,
+    required TResult Function(List<Pokemon> pokes) loaded,
     required TResult Function() empty,
   }) {
     return loaded(pokes);
@@ -282,7 +282,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
   }) {
     return loaded?.call(pokes);
@@ -292,7 +292,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -338,9 +338,9 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements FavouriteState {
-  const factory Loaded(List<Poke> pokes) = _$Loaded;
+  const factory Loaded(List<Pokemon> pokes) = _$Loaded;
 
-  List<Poke> get pokes;
+  List<Pokemon> get pokes;
   @JsonKey(ignore: true)
   $LoadedCopyWith<Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -384,7 +384,7 @@ class _$Empty implements Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Poke> pokes) loaded,
+    required TResult Function(List<Pokemon> pokes) loaded,
     required TResult Function() empty,
   }) {
     return empty();
@@ -394,7 +394,7 @@ class _$Empty implements Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
   }) {
     return empty?.call();
@@ -404,7 +404,7 @@ class _$Empty implements Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Poke> pokes)? loaded,
+    TResult Function(List<Pokemon> pokes)? loaded,
     TResult Function()? empty,
     required TResult orElse(),
   }) {

@@ -3,7 +3,7 @@ part of 'pokemon_list_cubit.dart';
 @freezed
 class PokemonListState with _$PokemonListState {
   const factory PokemonListState({
-    @Default([]) List<Poke> pokemons,
+    @Default([]) List<Pokemon> pokemons,
     @Default(false) bool hasReachedMax,
     @Default(StateStatus.loading()) StateStatus status,
   }) = _PokemonListState;

@@ -13,7 +13,17 @@ class FavouriteCubit extends Cubit<FavouriteState> {
   List<Pokemon> _pokemons = [];
 
   FavouriteCubit({required this.repository})
-      : super(const FavouriteState.initial());
+      : super(const FavouriteState.initial()) {
+    repository.addFavouriteListener((newPokemon) {
+      final isAvailable =
+          _pokemons.any((element) => element.id == newPokemon.id);
+      if (isAvailable) {
+        _removeFromFavourites(newPokemon);
+      } else {
+        _addToFavourite(newPokemon);
+      }
+    });
+  }
 
   Future<void> getAllFavourites() async {
     _pokemons = await repository.getAllFavourites();
@@ -24,26 +34,20 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     if (_pokemons.isEmpty) {
       emit(const Empty());
     } else {
-      emit(
-        Loaded(
-          _pokemons.map((e) => Poke(name: e.name, url: e.detailUrl)).toList(),
-        ),
-      );
+      emit(Loaded(List.of(_pokemons)));
     }
   }
 
-  Future<Pokemon> addToFavourite(Pokemon pokemon) async {
-    final newPokemon = await repository.addToFavourite(pokemon);
+  Future<Pokemon> _addToFavourite(Pokemon pokemon) async {
     _pokemons.add(pokemon);
     _emitDataState();
-    return newPokemon;
+    return pokemon;
   }
 
-  Future<Pokemon> removeFromFavourites(Pokemon pokemon) async {
-    final newPokemon = await repository.removeFromFavourite(pokemon);
+  Future<Pokemon> _removeFromFavourites(Pokemon pokemon) async {
     _pokemons.removeWhere((pok) => pokemon.id == pok.id);
-    debugPrint('Added ${newPokemon.name} to favourite...');
+    debugPrint('Added ${pokemon.name} to favourite...');
     _emitDataState();
-    return newPokemon;
+    return pokemon;
   }
 }

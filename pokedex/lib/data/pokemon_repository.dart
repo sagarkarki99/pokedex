@@ -7,4 +7,5 @@ abstract class PokemonRepository {
   Future<Pokemon> addToFavourite(Pokemon pokemon);
   Future<Pokemon> removeFromFavourite(Pokemon pokemon);
   Future<List<Pokemon>> getAllFavourites();
+  void addFavouriteListener(Function(Pokemon) onListen);
 }

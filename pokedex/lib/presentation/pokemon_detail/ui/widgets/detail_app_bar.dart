@@ -1,16 +1,17 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/presentation/pokemon/cubit/pokemon_cubit.dart';
-import 'package:pokedex/presentation/ui/ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../ui/ui.dart';
+import '../../cubit/pokemon_detail_cubit.dart';
 
 class DetailAppBar extends StatelessWidget {
   const DetailAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PokemonCubit, PokemonState>(
+    return BlocBuilder<PokemonDetailCubit, PokemonDetailState>(
       builder: (context, state) {
         return state.maybeWhen(
           orElse: () => const SizedBox(),

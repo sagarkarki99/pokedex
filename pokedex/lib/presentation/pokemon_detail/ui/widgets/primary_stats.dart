@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../pokemon/cubit/pokemon_cubit.dart';
 import '../../../ui/ui.dart';
+import '../../cubit/pokemon_detail_cubit.dart';
 
 class PrimaryStats extends StatelessWidget {
   const PrimaryStats({
@@ -11,7 +11,7 @@ class PrimaryStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PokemonCubit, PokemonState>(
+    return BlocBuilder<PokemonDetailCubit, PokemonDetailState>(
       builder: (context, state) => state.maybeWhen(
         orElse: () => const SizedBox(),
         loaded: (pokemon) => Container(

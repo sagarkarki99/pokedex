@@ -8,18 +8,17 @@ class FavouritesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
-    // return BlocBuilder<FavouriteCubit, FavouriteState>(
-    //   builder: (context, FavouriteState state) => state.maybeWhen(
-    //     orElse: () => const SizedBox(),
-    //     loaded: (pokes) => PaginatedPokemonList(pokes: pokes),
-    //     empty: () => Center(
-    //       child: Text(
-    //         'No pokemons in favourite.',
-    //         style: Theme.of(context).textTheme.headline5,
-    //       ),
-    //     ),
-    //   ),
-    // );
+    return BlocBuilder<FavouriteCubit, FavouriteState>(
+      builder: (context, FavouriteState state) => state.maybeWhen(
+        orElse: () => const SizedBox(),
+        loaded: (pokemons) => PaginatedPokemonList(pokemons: pokemons),
+        empty: () => Center(
+          child: Text(
+            'No pokemons in favourite.',
+            style: Theme.of(context).textTheme.headline5,
+          ),
+        ),
+      ),
+    );
   }
 }
