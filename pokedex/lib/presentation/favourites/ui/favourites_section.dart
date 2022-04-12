@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/presentation/ui/ui.dart';
-import './../cubit/favourite_cubit.dart';
+
+import '../../ui/ui.dart';
+import '../cubit/favourite_cubit.dart';
 
 class FavouritesSection extends StatelessWidget {
   const FavouritesSection({Key? key}) : super(key: key);

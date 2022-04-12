@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pokedex/data/models/pokemon.dart';
-import 'package:pokedex/data/models/pokemon_list_response.dart';
-import 'package:pokedex/data/pokemon_repository.dart';
 
-part 'favourite_state.dart';
+import '../../../data/models/pokemon.dart';
+import '../../../data/pokemon_repository.dart';
+
 part 'favourite_cubit.freezed.dart';
+part 'favourite_state.dart';
 
 class FavouriteCubit extends Cubit<FavouriteState> {
   final PokemonRepository repository;

@@ -1,13 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pokedex/core/exceptions/server_exception.dart';
-import 'package:pokedex/data/models/pokemon.dart';
-import 'package:pokedex/data/models/pokemon_list_response.dart';
-import 'package:pokedex/data/pokemon_repository.dart';
 
-part 'pokemon_list_state.dart';
+import '../../../core/exceptions/server_exception.dart';
+import '../../../data/models/pokemon.dart';
+import '../../../data/models/pokemon_list_response.dart';
+import '../../../data/pokemon_repository.dart';
+
 part 'pokemon_list_cubit.freezed.dart';
+part 'pokemon_list_state.dart';
 
 class PokemonListCubit extends Cubit<PokemonListState> {
   final PokemonRepository repository;
