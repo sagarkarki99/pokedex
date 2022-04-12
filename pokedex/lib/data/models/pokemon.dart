@@ -12,10 +12,12 @@ class Pokemon with _$Pokemon {
     required List<Stat> stats,
     required List<String> types,
     @Default(false) bool isFavourite,
+    required String detailUrl,
   }) = _Pokemon;
   Pokemon._();
 
-  factory Pokemon.fromRemoteJson(Map<String, dynamic> json) => Pokemon(
+  factory Pokemon.fromRemoteJson(Map<String, dynamic> json, String detailUrl) =>
+      Pokemon(
         id: json["id"] as int,
         name: json["name"] as String,
         height: json["height"] as int,
@@ -34,9 +36,10 @@ class Pokemon with _$Pokemon {
                   e['base_stat'] as int,
                 ))
             .toList(),
+        detailUrl: detailUrl,
       );
 
-  factory Pokemon.fromLocalJson(Map<String, dynamic> json) => Pokemon(
+  factory Pokemon.fromLocalJson(dynamic json) => Pokemon(
         id: json["id"],
         name: json['name'],
         height: json['height'],
@@ -50,6 +53,7 @@ class Pokemon with _$Pokemon {
             .toList(),
         types: json['types'] as List<String>,
         isFavourite: json['isFavourite'] as bool,
+        detailUrl: json['detailUrl'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -61,6 +65,7 @@ class Pokemon with _$Pokemon {
         'stats': stats.map((e) => e.toJson()).toList(),
         'types': types,
         'isFavourite': isFavourite,
+        'detailUrl': detailUrl,
       };
 
   String get idString => id.toString();

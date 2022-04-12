@@ -26,7 +26,8 @@ class _$PokemonTearOff {
       required String svgUrl,
       required List<Stat> stats,
       required List<String> types,
-      bool isFavourite = false}) {
+      bool isFavourite = false,
+      required String detailUrl}) {
     return _Pokemon(
       id: id,
       name: name,
@@ -36,6 +37,7 @@ class _$PokemonTearOff {
       stats: stats,
       types: types,
       isFavourite: isFavourite,
+      detailUrl: detailUrl,
     );
   }
 }
@@ -53,6 +55,7 @@ mixin _$Pokemon {
   List<Stat> get stats => throw _privateConstructorUsedError;
   List<String> get types => throw _privateConstructorUsedError;
   bool get isFavourite => throw _privateConstructorUsedError;
+  String get detailUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PokemonCopyWith<Pokemon> get copyWith => throw _privateConstructorUsedError;
@@ -70,7 +73,8 @@ abstract class $PokemonCopyWith<$Res> {
       String svgUrl,
       List<Stat> stats,
       List<String> types,
-      bool isFavourite});
+      bool isFavourite,
+      String detailUrl});
 }
 
 /// @nodoc
@@ -91,6 +95,7 @@ class _$PokemonCopyWithImpl<$Res> implements $PokemonCopyWith<$Res> {
     Object? stats = freezed,
     Object? types = freezed,
     Object? isFavourite = freezed,
+    Object? detailUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -125,6 +130,10 @@ class _$PokemonCopyWithImpl<$Res> implements $PokemonCopyWith<$Res> {
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
               as bool,
+      detailUrl: detailUrl == freezed
+          ? _value.detailUrl
+          : detailUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -142,7 +151,8 @@ abstract class _$PokemonCopyWith<$Res> implements $PokemonCopyWith<$Res> {
       String svgUrl,
       List<Stat> stats,
       List<String> types,
-      bool isFavourite});
+      bool isFavourite,
+      String detailUrl});
 }
 
 /// @nodoc
@@ -164,6 +174,7 @@ class __$PokemonCopyWithImpl<$Res> extends _$PokemonCopyWithImpl<$Res>
     Object? stats = freezed,
     Object? types = freezed,
     Object? isFavourite = freezed,
+    Object? detailUrl = freezed,
   }) {
     return _then(_Pokemon(
       id: id == freezed
@@ -198,6 +209,10 @@ class __$PokemonCopyWithImpl<$Res> extends _$PokemonCopyWithImpl<$Res>
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
               as bool,
+      detailUrl: detailUrl == freezed
+          ? _value.detailUrl
+          : detailUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -213,7 +228,8 @@ class _$_Pokemon extends _Pokemon {
       required this.svgUrl,
       required this.stats,
       required this.types,
-      this.isFavourite = false})
+      this.isFavourite = false,
+      required this.detailUrl})
       : super._();
 
   @override
@@ -233,10 +249,12 @@ class _$_Pokemon extends _Pokemon {
   @JsonKey()
   @override
   final bool isFavourite;
+  @override
+  final String detailUrl;
 
   @override
   String toString() {
-    return 'Pokemon(id: $id, name: $name, height: $height, weight: $weight, svgUrl: $svgUrl, stats: $stats, types: $types, isFavourite: $isFavourite)';
+    return 'Pokemon(id: $id, name: $name, height: $height, weight: $weight, svgUrl: $svgUrl, stats: $stats, types: $types, isFavourite: $isFavourite, detailUrl: $detailUrl)';
   }
 
   @override
@@ -252,7 +270,8 @@ class _$_Pokemon extends _Pokemon {
             const DeepCollectionEquality().equals(other.stats, stats) &&
             const DeepCollectionEquality().equals(other.types, types) &&
             const DeepCollectionEquality()
-                .equals(other.isFavourite, isFavourite));
+                .equals(other.isFavourite, isFavourite) &&
+            const DeepCollectionEquality().equals(other.detailUrl, detailUrl));
   }
 
   @override
@@ -265,7 +284,8 @@ class _$_Pokemon extends _Pokemon {
       const DeepCollectionEquality().hash(svgUrl),
       const DeepCollectionEquality().hash(stats),
       const DeepCollectionEquality().hash(types),
-      const DeepCollectionEquality().hash(isFavourite));
+      const DeepCollectionEquality().hash(isFavourite),
+      const DeepCollectionEquality().hash(detailUrl));
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +302,8 @@ abstract class _Pokemon extends Pokemon {
       required String svgUrl,
       required List<Stat> stats,
       required List<String> types,
-      bool isFavourite}) = _$_Pokemon;
+      bool isFavourite,
+      required String detailUrl}) = _$_Pokemon;
   _Pokemon._() : super._();
 
   @override
@@ -301,6 +322,8 @@ abstract class _Pokemon extends Pokemon {
   List<String> get types;
   @override
   bool get isFavourite;
+  @override
+  String get detailUrl;
   @override
   @JsonKey(ignore: true)
   _$PokemonCopyWith<_Pokemon> get copyWith =>

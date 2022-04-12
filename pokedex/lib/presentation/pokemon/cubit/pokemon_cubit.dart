@@ -5,17 +5,19 @@ import '../../../data/models/pokemon.dart';
 import '../../../data/pokemon_repository.dart';
 import '../../pokemon_detail/view_model/pokemon_detail_view_model.dart';
 import '../../ui/ui_extension.dart';
-
+import './../../favourites/cubit/favourite_cubit.dart';
 part 'pokemon_cubit.freezed.dart';
 part 'pokemon_state.dart';
 
 class PokemonCubit extends Cubit<PokemonState> {
   final PokemonRepository repository;
+  final FavouriteCubit favouriteCubit;
   final String detailUrl;
   late Pokemon pokemon;
   PokemonCubit({
     required this.repository,
     required this.detailUrl,
+    required this.favouriteCubit,
   }) : super(const PokemonState.loading()) {
     getDetail();
   }
@@ -32,8 +34,8 @@ class PokemonCubit extends Cubit<PokemonState> {
 
   Future<void> toggleFavourite() async {
     pokemon = pokemon.isFavourite
-        ? await repository.removeFromFavourite(pokemon)
-        : await repository.addToFavourite(pokemon);
+        ? await favouriteCubit.removeFromFavourites(pokemon)
+        : await favouriteCubit.addToFavourite(pokemon);
     emit(Loaded(pokemon.toViewModel));
   }
 }

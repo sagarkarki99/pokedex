@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/presentation/ui/ui.dart';
+import './../cubit/favourite_cubit.dart';
 
-class FavouritesSection extends StatefulWidget {
+class FavouritesSection extends StatelessWidget {
   const FavouritesSection({Key? key}) : super(key: key);
 
   @override
-  State<FavouritesSection> createState() => _FavouritesSectionState();
-}
-
-class _FavouritesSectionState extends State<FavouritesSection> {
-  bool isFavourite = false;
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
+    return BlocBuilder<FavouriteCubit, FavouriteState>(
+      builder: (context, FavouriteState state) => state.maybeWhen(
+        orElse: () => const SizedBox(),
+        loaded: (pokes) => PaginatedPokemonList(pokes: pokes),
+        empty: () => Center(
+          child: Text(
+            'No pokemons in favourite.',
+            style: Theme.of(context).textTheme.headline5,
+          ),
+        ),
+      ),
     );
   }
 }

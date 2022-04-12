@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 
@@ -36,18 +38,43 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Pokemon> getPokemonDetail(String detailUrl) async {
     try {
       final response = await dio.get(detailUrl);
-      final pok = Pokemon.fromRemoteJson(response.data);
-
+      Pokemon pok = Pokemon.fromRemoteJson(response.data, detailUrl);
+      final localPokemon = favouritesBox.get(detailUrl);
+      if (localPokemon != null) {
+        favouritesBox.delete(detailUrl);
+        pok = pok.copyWith(isFavourite: true);
+        favouritesBox.put(detailUrl, pok.toJson());
+      }
       return pok;
     } on DioError catch (e) {
+      final localPokemon = favouritesBox.get(detailUrl);
+      if (localPokemon != null) {
+        return Pokemon.fromLocalJson(localPokemon);
+      }
       throw ServerException(400, '');
     }
   }
 
   @override
   Future<List<Pokemon>> getAllFavourites() {
-    return Future.value(favouritesBox.values
-        .map((value) => Pokemon.fromLocalJson(value as Map<String, dynamic>))
+    if (favouritesBox.isEmpty) return Future.value([]);
+    return Future.value((favouritesBox.values)
+        .map((json) => Pokemon(
+              id: json["id"],
+              name: json['name'],
+              height: json['height'],
+              weight: json['weight'],
+              svgUrl: json['svgUrl'],
+              stats: (json['stats'] as List<dynamic>)
+                  .map((e) => Stat(
+                        e['name'] as String,
+                        e['value'] as int,
+                      ))
+                  .toList(),
+              types: json['types'] as List<String>,
+              isFavourite: json['isFavourite'] as bool,
+              detailUrl: json['detailUrl'],
+            ))
         .toList());
   }
 
@@ -55,13 +82,13 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Pokemon> addToFavourite(Pokemon pokemon) async {
     final newPokemon = pokemon.copyWith(isFavourite: true);
     final pokemonJson = newPokemon.toJson();
-    favouritesBox.put(newPokemon.id, pokemonJson);
+    favouritesBox.put(newPokemon.detailUrl, pokemonJson.toString());
     return newPokemon;
   }
 
   @override
   Future<Pokemon> removeFromFavourite(Pokemon pokemon) async {
-    await favouritesBox.delete(pokemon.id);
+    await favouritesBox.delete(pokemon.detailUrl);
     return pokemon.copyWith(isFavourite: false);
   }
 }
