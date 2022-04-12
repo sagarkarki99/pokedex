@@ -7,38 +7,21 @@ import '../../../data/pokemon_repository_impl.dart';
 import '../../pokemon/cubit/pokemon_cubit.dart';
 import '../ui.dart';
 
-class PaginatedPokemonList extends StatefulWidget {
-  final List<Poke> pokes;
-  const PaginatedPokemonList({Key? key, required this.pokes}) : super(key: key);
-
-  @override
-  State<PaginatedPokemonList> createState() => PaginatedPokemonListState();
-}
-
-class PaginatedPokemonListState extends State<PaginatedPokemonList> {
-  late List<PokemonCubit> pokemonCubits;
-
-  @override
-  void initState() {
-    pokemonCubits = widget.pokes
-        .map(
-          (e) => PokemonCubit(
-            detailUrl: e.url,
-            favouriteCubit: context.read<FavouriteCubit>(),
-            repository: PokemonRepositoryImpl(
-              dio: Dio(),
-            ),
-          ),
-        )
-        .toList();
-    super.initState();
-  }
+class PaginatedPokemonList extends StatelessWidget {
+  final List<PokemonCubit> pokemonCubits;
+  final ScrollController? scrollController;
+  const PaginatedPokemonList({
+    Key? key,
+    required this.pokemonCubits,
+    this.scrollController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      controller: scrollController,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-      itemCount: widget.pokes.length,
+      itemCount: pokemonCubits.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 12.0,

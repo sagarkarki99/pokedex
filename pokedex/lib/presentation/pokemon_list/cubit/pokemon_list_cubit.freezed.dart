@@ -20,9 +20,11 @@ class _$PokemonListStateTearOff {
 
   _PokemonListState call(
       {List<Poke> pokemons = const [],
+      bool hasReachedMax = false,
       StateStatus status = const StateStatus.loading()}) {
     return _PokemonListState(
       pokemons: pokemons,
+      hasReachedMax: hasReachedMax,
       status: status,
     );
   }
@@ -34,6 +36,7 @@ const $PokemonListState = _$PokemonListStateTearOff();
 /// @nodoc
 mixin _$PokemonListState {
   List<Poke> get pokemons => throw _privateConstructorUsedError;
+  bool get hasReachedMax => throw _privateConstructorUsedError;
   StateStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -46,7 +49,7 @@ abstract class $PokemonListStateCopyWith<$Res> {
   factory $PokemonListStateCopyWith(
           PokemonListState value, $Res Function(PokemonListState) then) =
       _$PokemonListStateCopyWithImpl<$Res>;
-  $Res call({List<Poke> pokemons, StateStatus status});
+  $Res call({List<Poke> pokemons, bool hasReachedMax, StateStatus status});
 
   $StateStatusCopyWith<$Res> get status;
 }
@@ -63,6 +66,7 @@ class _$PokemonListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pokemons = freezed,
+    Object? hasReachedMax = freezed,
     Object? status = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +74,10 @@ class _$PokemonListStateCopyWithImpl<$Res>
           ? _value.pokemons
           : pokemons // ignore: cast_nullable_to_non_nullable
               as List<Poke>,
+      hasReachedMax: hasReachedMax == freezed
+          ? _value.hasReachedMax
+          : hasReachedMax // ignore: cast_nullable_to_non_nullable
+              as bool,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -92,7 +100,7 @@ abstract class _$PokemonListStateCopyWith<$Res>
           _PokemonListState value, $Res Function(_PokemonListState) then) =
       __$PokemonListStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Poke> pokemons, StateStatus status});
+  $Res call({List<Poke> pokemons, bool hasReachedMax, StateStatus status});
 
   @override
   $StateStatusCopyWith<$Res> get status;
@@ -112,6 +120,7 @@ class __$PokemonListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pokemons = freezed,
+    Object? hasReachedMax = freezed,
     Object? status = freezed,
   }) {
     return _then(_PokemonListState(
@@ -119,6 +128,10 @@ class __$PokemonListStateCopyWithImpl<$Res>
           ? _value.pokemons
           : pokemons // ignore: cast_nullable_to_non_nullable
               as List<Poke>,
+      hasReachedMax: hasReachedMax == freezed
+          ? _value.hasReachedMax
+          : hasReachedMax // ignore: cast_nullable_to_non_nullable
+              as bool,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -131,18 +144,23 @@ class __$PokemonListStateCopyWithImpl<$Res>
 
 class _$_PokemonListState implements _PokemonListState {
   const _$_PokemonListState(
-      {this.pokemons = const [], this.status = const StateStatus.loading()});
+      {this.pokemons = const [],
+      this.hasReachedMax = false,
+      this.status = const StateStatus.loading()});
 
   @JsonKey()
   @override
   final List<Poke> pokemons;
   @JsonKey()
   @override
+  final bool hasReachedMax;
+  @JsonKey()
+  @override
   final StateStatus status;
 
   @override
   String toString() {
-    return 'PokemonListState(pokemons: $pokemons, status: $status)';
+    return 'PokemonListState(pokemons: $pokemons, hasReachedMax: $hasReachedMax, status: $status)';
   }
 
   @override
@@ -151,6 +169,8 @@ class _$_PokemonListState implements _PokemonListState {
         (other.runtimeType == runtimeType &&
             other is _PokemonListState &&
             const DeepCollectionEquality().equals(other.pokemons, pokemons) &&
+            const DeepCollectionEquality()
+                .equals(other.hasReachedMax, hasReachedMax) &&
             const DeepCollectionEquality().equals(other.status, status));
   }
 
@@ -158,6 +178,7 @@ class _$_PokemonListState implements _PokemonListState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(pokemons),
+      const DeepCollectionEquality().hash(hasReachedMax),
       const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
@@ -167,11 +188,15 @@ class _$_PokemonListState implements _PokemonListState {
 }
 
 abstract class _PokemonListState implements PokemonListState {
-  const factory _PokemonListState({List<Poke> pokemons, StateStatus status}) =
-      _$_PokemonListState;
+  const factory _PokemonListState(
+      {List<Poke> pokemons,
+      bool hasReachedMax,
+      StateStatus status}) = _$_PokemonListState;
 
   @override
   List<Poke> get pokemons;
+  @override
+  bool get hasReachedMax;
   @override
   StateStatus get status;
   @override
@@ -186,6 +211,10 @@ class _$StateStatusTearOff {
 
   Loading loading() {
     return const Loading();
+  }
+
+  FetchingMore fetchingMore() {
+    return const FetchingMore();
   }
 
   Loaded loaded() {
@@ -207,6 +236,7 @@ mixin _$StateStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() fetchingMore,
     required TResult Function() loaded,
     required TResult Function(String errorMessage) error,
   }) =>
@@ -214,6 +244,7 @@ mixin _$StateStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
   }) =>
@@ -221,6 +252,7 @@ mixin _$StateStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -229,6 +261,7 @@ mixin _$StateStatus {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
+    required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
     required TResult Function(Error value) error,
   }) =>
@@ -236,6 +269,7 @@ mixin _$StateStatus {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
   }) =>
@@ -243,6 +277,7 @@ mixin _$StateStatus {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -305,6 +340,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() fetchingMore,
     required TResult Function() loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -315,6 +351,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
   }) {
@@ -325,6 +362,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -339,6 +377,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
+    required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
     required TResult Function(Error value) error,
   }) {
@@ -349,6 +388,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
   }) {
@@ -359,6 +399,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -372,6 +413,122 @@ class _$Loading implements Loading {
 
 abstract class Loading implements StateStatus {
   const factory Loading() = _$Loading;
+}
+
+/// @nodoc
+abstract class $FetchingMoreCopyWith<$Res> {
+  factory $FetchingMoreCopyWith(
+          FetchingMore value, $Res Function(FetchingMore) then) =
+      _$FetchingMoreCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$FetchingMoreCopyWithImpl<$Res> extends _$StateStatusCopyWithImpl<$Res>
+    implements $FetchingMoreCopyWith<$Res> {
+  _$FetchingMoreCopyWithImpl(
+      FetchingMore _value, $Res Function(FetchingMore) _then)
+      : super(_value, (v) => _then(v as FetchingMore));
+
+  @override
+  FetchingMore get _value => super._value as FetchingMore;
+}
+
+/// @nodoc
+
+class _$FetchingMore implements FetchingMore {
+  const _$FetchingMore();
+
+  @override
+  String toString() {
+    return 'StateStatus.fetchingMore()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is FetchingMore);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() fetchingMore,
+    required TResult Function() loaded,
+    required TResult Function(String errorMessage) error,
+  }) {
+    return fetchingMore();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? fetchingMore,
+    TResult Function()? loaded,
+    TResult Function(String errorMessage)? error,
+  }) {
+    return fetchingMore?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? fetchingMore,
+    TResult Function()? loaded,
+    TResult Function(String errorMessage)? error,
+    required TResult orElse(),
+  }) {
+    if (fetchingMore != null) {
+      return fetchingMore();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Loading value) loading,
+    required TResult Function(FetchingMore value) fetchingMore,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+  }) {
+    return fetchingMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+  }) {
+    return fetchingMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (fetchingMore != null) {
+      return fetchingMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FetchingMore implements StateStatus {
+  const factory FetchingMore() = _$FetchingMore;
 }
 
 /// @nodoc
@@ -413,6 +570,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() fetchingMore,
     required TResult Function() loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -423,6 +581,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
   }) {
@@ -433,6 +592,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -447,6 +607,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
+    required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
     required TResult Function(Error value) error,
   }) {
@@ -457,6 +618,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
   }) {
@@ -467,6 +629,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -546,6 +709,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
+    required TResult Function() fetchingMore,
     required TResult Function() loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -556,6 +720,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
   }) {
@@ -566,6 +731,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
+    TResult Function()? fetchingMore,
     TResult Function()? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -580,6 +746,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
+    required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
     required TResult Function(Error value) error,
   }) {
@@ -590,6 +757,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
   }) {
@@ -600,6 +768,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
     required TResult orElse(),

@@ -2,7 +2,7 @@ import 'models/pokemon.dart';
 import 'models/pokemon_list_response.dart';
 
 abstract class PokemonRepository {
-  Future<PokemonListResponse> fetchPokemons();
+  Future<PokemonListResponse> fetchPokemons({String? url});
   Future<Pokemon> getPokemonDetail(String detailUrl);
   Future<Pokemon> addToFavourite(Pokemon pokemon);
   Future<Pokemon> removeFromFavourite(Pokemon pokemon);

@@ -20,14 +20,10 @@ class PokemonRepositoryImpl implements PokemonRepository {
     favouritesBox = Hive.box(LocalStorageKey.favouritesKey);
   }
   @override
-  Future<PokemonListResponse> fetchPokemons() async {
+  Future<PokemonListResponse> fetchPokemons({String? url}) async {
     try {
-      final response = await dio.get(
-        baseUrl + _Endpoints.allPokemons,
-        queryParameters: {
-          "limit": 30,
-        },
-      );
+      final response = await dio
+          .get(url ?? 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=30');
       return PokemonListResponse.fromJson(response.data);
     } on DioError catch (e) {
       throw ServerException(400, '');
