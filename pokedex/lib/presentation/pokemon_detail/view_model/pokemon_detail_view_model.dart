@@ -17,6 +17,7 @@ class PokemonDetailViewModel with _$PokemonDetailViewModel {
     required int specialAttack,
     required int speed,
     required String type,
+    required bool isFavourite,
   }) = _PokemonDetailViewModel;
 
   PokemonDetailViewModel._();

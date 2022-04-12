@@ -34,6 +34,7 @@ extension ViewModel on Pokemon {
       specialDefense:
           stats.firstWhere((stat) => stat.name == 'special-defense').value,
       speed: stats.firstWhere((stat) => stat.name == 'speed').value,
+      isFavourite: isFavourite,
     );
   }
 }

@@ -1,13 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/data/local/database.dart';
 import 'package:pokedex/data/pokemon_repository_impl.dart';
 import 'package:pokedex/presentation/ui/ui.dart';
 
 import 'presentation/pokemon_list/cubit/pokemon_list_cubit.dart';
 import 'presentation/pokemon_list/ui/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initDatabase();
   runApp(const Pokedex());
 }
 

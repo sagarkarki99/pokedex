@@ -29,4 +29,11 @@ class PokemonCubit extends Cubit<PokemonState> {
       print(e);
     }
   }
+
+  Future<void> toggleFavourite() async {
+    pokemon = pokemon.isFavourite
+        ? await repository.removeFromFavourite(pokemon)
+        : await repository.addToFavourite(pokemon);
+    emit(Loaded(pokemon.toViewModel));
+  }
 }

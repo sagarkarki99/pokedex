@@ -31,7 +31,8 @@ class _$PokemonDetailViewModelTearOff {
       required int specialDefense,
       required int specialAttack,
       required int speed,
-      required String type}) {
+      required String type,
+      required bool isFavourite}) {
     return _PokemonDetailViewModel(
       id: id,
       name: name,
@@ -46,6 +47,7 @@ class _$PokemonDetailViewModelTearOff {
       specialAttack: specialAttack,
       speed: speed,
       type: type,
+      isFavourite: isFavourite,
     );
   }
 }
@@ -68,6 +70,7 @@ mixin _$PokemonDetailViewModel {
   int get specialAttack => throw _privateConstructorUsedError;
   int get speed => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  bool get isFavourite => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PokemonDetailViewModelCopyWith<PokemonDetailViewModel> get copyWith =>
@@ -92,7 +95,8 @@ abstract class $PokemonDetailViewModelCopyWith<$Res> {
       int specialDefense,
       int specialAttack,
       int speed,
-      String type});
+      String type,
+      bool isFavourite});
 }
 
 /// @nodoc
@@ -119,6 +123,7 @@ class _$PokemonDetailViewModelCopyWithImpl<$Res>
     Object? specialAttack = freezed,
     Object? speed = freezed,
     Object? type = freezed,
+    Object? isFavourite = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -173,6 +178,10 @@ class _$PokemonDetailViewModelCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      isFavourite: isFavourite == freezed
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -197,7 +206,8 @@ abstract class _$PokemonDetailViewModelCopyWith<$Res>
       int specialDefense,
       int specialAttack,
       int speed,
-      String type});
+      String type,
+      bool isFavourite});
 }
 
 /// @nodoc
@@ -226,6 +236,7 @@ class __$PokemonDetailViewModelCopyWithImpl<$Res>
     Object? specialAttack = freezed,
     Object? speed = freezed,
     Object? type = freezed,
+    Object? isFavourite = freezed,
   }) {
     return _then(_PokemonDetailViewModel(
       id: id == freezed
@@ -280,6 +291,10 @@ class __$PokemonDetailViewModelCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      isFavourite: isFavourite == freezed
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -300,7 +315,8 @@ class _$_PokemonDetailViewModel extends _PokemonDetailViewModel {
       required this.specialDefense,
       required this.specialAttack,
       required this.speed,
-      required this.type})
+      required this.type,
+      required this.isFavourite})
       : super._();
 
   @override
@@ -329,10 +345,12 @@ class _$_PokemonDetailViewModel extends _PokemonDetailViewModel {
   final int speed;
   @override
   final String type;
+  @override
+  final bool isFavourite;
 
   @override
   String toString() {
-    return 'PokemonDetailViewModel(id: $id, name: $name, height: $height, weight: $weight, bmi: $bmi, svgUrl: $svgUrl, hp: $hp, attack: $attack, defense: $defense, specialDefense: $specialDefense, specialAttack: $specialAttack, speed: $speed, type: $type)';
+    return 'PokemonDetailViewModel(id: $id, name: $name, height: $height, weight: $weight, bmi: $bmi, svgUrl: $svgUrl, hp: $hp, attack: $attack, defense: $defense, specialDefense: $specialDefense, specialAttack: $specialAttack, speed: $speed, type: $type, isFavourite: $isFavourite)';
   }
 
   @override
@@ -354,7 +372,9 @@ class _$_PokemonDetailViewModel extends _PokemonDetailViewModel {
             const DeepCollectionEquality()
                 .equals(other.specialAttack, specialAttack) &&
             const DeepCollectionEquality().equals(other.speed, speed) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality()
+                .equals(other.isFavourite, isFavourite));
   }
 
   @override
@@ -372,7 +392,8 @@ class _$_PokemonDetailViewModel extends _PokemonDetailViewModel {
       const DeepCollectionEquality().hash(specialDefense),
       const DeepCollectionEquality().hash(specialAttack),
       const DeepCollectionEquality().hash(speed),
-      const DeepCollectionEquality().hash(type));
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(isFavourite));
 
   @JsonKey(ignore: true)
   @override
@@ -395,7 +416,8 @@ abstract class _PokemonDetailViewModel extends PokemonDetailViewModel {
       required int specialDefense,
       required int specialAttack,
       required int speed,
-      required String type}) = _$_PokemonDetailViewModel;
+      required String type,
+      required bool isFavourite}) = _$_PokemonDetailViewModel;
   _PokemonDetailViewModel._() : super._();
 
   @override
@@ -424,6 +446,8 @@ abstract class _PokemonDetailViewModel extends PokemonDetailViewModel {
   int get speed;
   @override
   String get type;
+  @override
+  bool get isFavourite;
   @override
   @JsonKey(ignore: true)
   _$PokemonDetailViewModelCopyWith<_PokemonDetailViewModel> get copyWith =>

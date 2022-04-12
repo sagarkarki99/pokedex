@@ -1,31 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/presentation/pokemon/cubit/pokemon_cubit.dart';
 import 'package:pokedex/presentation/ui/ui.dart';
 
 class FavouriteButton extends StatelessWidget {
-  final bool isFavourite;
   final VoidCallback? onPressed;
   const FavouriteButton({
     Key? key,
-    this.isFavourite = false,
     this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: isFavourite ? AppColors.primaryLight : AppColors.primary,
-          borderRadius: BorderRadius.circular(36.0),
-          boxShadow: [
-            isFavourite ? _getUnMarkShadow() : _getMarkShadow(),
-          ],
+    return BlocBuilder<PokemonCubit, PokemonState>(
+      builder: (context, state) => state.maybeWhen(
+        orElse: () => const SizedBox(),
+        loaded: (pokemon) => InkWell(
+          onTap: onPressed,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: pokemon.isFavourite
+                  ? AppColors.primaryLight
+                  : AppColors.primary,
+              borderRadius: BorderRadius.circular(36.0),
+              boxShadow: [
+                pokemon.isFavourite ? _getUnMarkShadow() : _getMarkShadow(),
+              ],
+            ),
+            child: pokemon.isFavourite
+                ? _getUnMarkText(context)
+                : _getMarkText(context),
+          ),
         ),
-        child: isFavourite ? _getUnMarkText(context) : _getMarkText(context),
       ),
     );
   }

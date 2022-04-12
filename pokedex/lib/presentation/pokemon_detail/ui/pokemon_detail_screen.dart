@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:pokedex/presentation/pokemon/cubit/pokemon_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../ui/ui.dart';
 import 'widgets/widgets.dart';
 
@@ -23,7 +24,9 @@ class PokemonDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FavouriteButton(onPressed: () {}),
+      floatingActionButton: FavouriteButton(
+        onPressed: context.read<PokemonCubit>().toggleFavourite,
+      ),
     );
   }
 }

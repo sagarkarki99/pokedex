@@ -11,31 +11,57 @@ class Pokemon with _$Pokemon {
     required String svgUrl,
     required List<Stat> stats,
     required List<String> types,
+    @Default(false) bool isFavourite,
   }) = _Pokemon;
   Pokemon._();
 
-  factory Pokemon.fromJson(Map<String, dynamic> json) {
-    return Pokemon(
-      id: json["id"] as int,
-      name: json["name"] as String,
-      height: json["height"] as int,
-      weight: json["weight"] as int,
-      svgUrl: (((json['sprites'] as Map<String, dynamic>)['other']
-              as Map<String, dynamic>)['official-artwork']
-          as Map<String, dynamic>)['front_default'] as String,
-      types: (json["types"] as List<dynamic>)
-          .map((e) => ((e as Map<String, dynamic>)['type']
-              as Map<String, dynamic>)['name'] as String)
-          .toList(),
-      stats: (json["stats"] as List<dynamic>)
-          .map((e) => Stat(
-                ((e as Map<String, dynamic>)['stat']
-                    as Map<String, dynamic>)['name'] as String,
-                e['base_stat'] as int,
-              ))
-          .toList(),
-    );
-  }
+  factory Pokemon.fromRemoteJson(Map<String, dynamic> json) => Pokemon(
+        id: json["id"] as int,
+        name: json["name"] as String,
+        height: json["height"] as int,
+        weight: json["weight"] as int,
+        svgUrl: (((json['sprites'] as Map<String, dynamic>)['other']
+                as Map<String, dynamic>)['official-artwork']
+            as Map<String, dynamic>)['front_default'] as String,
+        types: (json["types"] as List<dynamic>)
+            .map((e) => ((e as Map<String, dynamic>)['type']
+                as Map<String, dynamic>)['name'] as String)
+            .toList(),
+        stats: (json["stats"] as List<dynamic>)
+            .map((e) => Stat(
+                  ((e as Map<String, dynamic>)['stat']
+                      as Map<String, dynamic>)['name'] as String,
+                  e['base_stat'] as int,
+                ))
+            .toList(),
+      );
+
+  factory Pokemon.fromLocalJson(Map<String, dynamic> json) => Pokemon(
+        id: json["id"],
+        name: json['name'],
+        height: json['height'],
+        weight: json['weight'],
+        svgUrl: json['svgUrl'],
+        stats: (json['stats'] as List<dynamic>)
+            .map((e) => Stat(
+                  e['name'] as String,
+                  e['value'] as int,
+                ))
+            .toList(),
+        types: json['types'] as List<String>,
+        isFavourite: json['isFavourite'] as bool,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'height': height,
+        'weight': weight,
+        'svgUrl': svgUrl,
+        'stats': stats.map((e) => e.toJson()).toList(),
+        'types': types,
+        'isFavourite': isFavourite,
+      };
 
   String get idString => id.toString();
   String get bmi => (weight / (height * height)).toStringAsFixed(1);
@@ -46,4 +72,9 @@ class Stat {
   final int value;
 
   Stat(this.name, this.value);
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'value': value,
+      };
 }
