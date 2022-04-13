@@ -32,6 +32,7 @@ class AllPokemonSection extends StatelessWidget {
           return PaginatedPokemonList(
             pokemons: state.pokemons,
             scrollController: context.read<PokemonListCubit>().controller,
+            showLoading: !state.hasReachedMax,
           );
         },
         primaryError: (message) => Center(
