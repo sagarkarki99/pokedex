@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
-import './../core/extensions/error_extension.dart';
 import '../core/exceptions/app_exception.dart';
 import 'local/database.dart';
 import 'models/pokemon.dart';
