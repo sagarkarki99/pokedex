@@ -27,16 +27,7 @@ class PokemonItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            model.svgUrl.contains('.svg')
-                ? PokemonSvg(model: model)
-                : ExtendedImage.network(
-                    model.svgUrl,
-                    loadStateChanged: (state) {
-                      if (state.extendedImageLoadState == LoadState.loading) {
-                        return const ShimmerLoadingItem();
-                      }
-                    },
-                  ),
+            Expanded(child: PokemonImage(url: model.svgUrl)),
             _Description(model: model),
           ],
         ),

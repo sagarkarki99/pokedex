@@ -42,7 +42,11 @@ class DetailAppBar extends StatelessWidget {
                         horizontal: 16.0, vertical: 12.0),
                     color: pokemon.getBgColor(),
                     alignment: Alignment.bottomRight,
-                    child: _PokemonImage(url: pokemon.svgUrl),
+                    child: PokemonImage(
+                      url: pokemon.svgUrl,
+                      height: 125,
+                      width: 136,
+                    ),
                   ),
                   Positioned(
                     left: 16.0,
@@ -59,29 +63,6 @@ class DetailAppBar extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-class _PokemonImage extends StatelessWidget {
-  final String url;
-  const _PokemonImage({
-    Key? key,
-    required this.url,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return url.contains('.svg')
-        ? SvgPicture.network(
-            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
-            height: 125,
-            width: 136,
-          )
-        : ExtendedImage.network(
-            url,
-            height: 125,
-            width: 136,
-          );
   }
 }
 

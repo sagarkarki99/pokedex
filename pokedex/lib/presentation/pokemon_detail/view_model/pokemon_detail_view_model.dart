@@ -21,6 +21,7 @@ class PokemonDetailViewModel with _$PokemonDetailViewModel {
   }) = _PokemonDetailViewModel;
 
   PokemonDetailViewModel._();
-  int get avgPower => 0;
+  int get avgPower =>
+      ((hp + attack + defense + specialAttack + specialDefense + speed) ~/ 6);
   String get idString => id.toString();
 }

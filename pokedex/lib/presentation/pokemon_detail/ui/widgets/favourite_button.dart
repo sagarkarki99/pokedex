@@ -68,7 +68,7 @@ class FavouriteButton extends StatelessWidget {
 
   Text _getUnMarkText(BuildContext context) {
     return Text(
-      'Removte from Favourites',
+      'Remove from Favourites',
       style: Theme.of(context).textTheme.bodyText2!.copyWith(
             color: AppColors.primary,
             fontWeight: FontWeight.bold,

@@ -54,10 +54,9 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<List<Pokemon>> getAllFavourites() {
-    if (favouritesBox.isEmpty) return Future.value([]);
     return Future.value((favouritesBox.values)
         .map((json) => Pokemon(
-              id: json["id"] as int,
+              id: json['id'] as int,
               name: json['name'],
               height: json['height'],
               weight: json['weight'],
@@ -79,7 +78,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Pokemon> addToFavourite(Pokemon pokemon) async {
     final newPokemon = pokemon.copyWith(isFavourite: true);
     final pokemonJson = newPokemon.toJson();
-    favouritesBox.put(newPokemon.detailUrl, pokemonJson.toString());
+    favouritesBox.put(newPokemon.detailUrl, pokemonJson);
     _notifyListeners(newPokemon);
     return newPokemon;
   }

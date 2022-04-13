@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/data/local/database.dart';
 import 'package:pokedex/data/pokemon_repository.dart';
 import 'package:pokedex/data/pokemon_repository_impl.dart';
+import 'package:pokedex/presentation/ui/other_screens/splash_screen.dart';
 import 'package:pokedex/presentation/ui/ui.dart';
 import './presentation/favourites/cubit/favourite_cubit.dart';
 import 'core/di/di.dart';
@@ -29,13 +30,31 @@ class Pokedex extends StatelessWidget {
       child: MaterialApp(
         title: 'Pokedex',
         theme: AppTheme.primary(),
-        home: BlocProvider(
-          create: (context) => PokemonListCubit(
-            repository: locator<PokemonRepository>(),
-          )..fetchPokemons(),
-          child: const HomeScreen(),
-        ),
+        home: const InitialScreen(),
       ),
     );
+  }
+}
+
+class InitialScreen extends StatelessWidget {
+  const InitialScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    //Just for this time. It is not a preferred way.dart';'
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => PokemonListCubit(
+              repository: locator<PokemonRepository>(),
+            )..fetchPokemons(),
+            child: const HomeScreen(),
+          ),
+        ),
+      );
+    });
+    return const SplashScreen();
   }
 }
