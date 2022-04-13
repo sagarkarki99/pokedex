@@ -68,7 +68,7 @@ class Pokemon with _$Pokemon {
         'detailUrl': detailUrl,
       };
 
-  String get idString => id.toString();
+  String get idString => '#${id.toString().padLeft(3, '0')}';
   String get bmi => (weight / (height * height)).toStringAsFixed(1);
 }
 

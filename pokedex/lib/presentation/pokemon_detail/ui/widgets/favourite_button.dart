@@ -30,9 +30,11 @@ class FavouriteButton extends StatelessWidget {
                 pokemon.isFavourite ? _getUnMarkShadow() : _getMarkShadow(),
               ],
             ),
-            child: pokemon.isFavourite
-                ? _getUnMarkText(context)
-                : _getMarkText(context),
+            child: Center(
+              child: pokemon.isFavourite
+                  ? _getUnMarkText(context)
+                  : _getMarkText(context),
+            ),
           ),
         ),
       ),

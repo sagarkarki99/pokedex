@@ -42,7 +42,7 @@ class PaginatedPokemonList extends StatelessWidget {
             model: PokemonViewModel(
               name: pokemon.name,
               power: pokemon.types.join(','),
-              idString: pokemon.id.toString(),
+              idString: pokemon.idString,
               svgUrl: pokemon.svgUrl,
               id: pokemon.id,
               bgColor: pokemon.getBgColor(),

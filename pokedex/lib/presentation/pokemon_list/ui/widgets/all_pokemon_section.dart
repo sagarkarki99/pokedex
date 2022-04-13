@@ -12,11 +12,14 @@ class AllPokemonSection extends StatelessWidget {
     return BlocConsumer<PokemonListCubit, PokemonListState>(
       listener: (context, state) => state.status.maybeWhen(
         orElse: () {},
-        secondaryError: (message) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(message),
+        secondaryError: (message) => ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              backgroundColor: AppColors.redish,
+              content: Text(message),
+            ),
           ),
-        ),
       ),
       builder: (context, state) => state.status.maybeWhen(
         loading: () => const Center(

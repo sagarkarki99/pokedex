@@ -27,7 +27,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
           .get(url ?? 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=30');
       return PokemonListResponse.fromJson(response.data);
     } on DioError catch (e) {
-      throw ServerException(400, '');
+      throw ServerException(400, 'Something went wrong!');
     }
   }
 
@@ -53,25 +53,19 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<List<Pokemon>> getAllFavourites() {
-    return Future.value((favouritesBox.values)
-        .map((json) => Pokemon(
-              id: json['id'] as int,
-              name: json['name'],
-              height: json['height'],
-              weight: json['weight'],
-              svgUrl: json['svgUrl'],
-              stats: (json['stats'] as List<dynamic>)
-                  .map((e) => Stat(
-                        e['name'] as String,
-                        e['value'] as int,
-                      ))
-                  .toList(),
-              types: json['types'] as List<String>,
-              isFavourite: json['isFavourite'] as bool,
-              detailUrl: json['detailUrl'],
-            ))
-        .toList());
+  Future<List<Pokemon>> getAllFavourites() async {
+    final List<Pokemon> pokemons = [];
+    for (var key in favouritesBox.keys) {
+      try {
+        final pokemon = await getPokemonDetail(key);
+        _updateLocalPokemon(key, pokemon);
+        pokemons.add(pokemon);
+      } on Exception catch (_) {
+        final data = favouritesBox.get(key);
+        pokemons.add(Pokemon.fromLocalJson(data));
+      }
+    }
+    return pokemons;
   }
 
   @override
@@ -100,5 +94,10 @@ class PokemonRepositoryImpl implements PokemonRepository {
     for (var fn in favouriteListeners) {
       fn(newPokemon);
     }
+  }
+
+  void _updateLocalPokemon(key, Pokemon pokemon) {
+    favouritesBox.delete(key);
+    favouritesBox.put(key, pokemon.toJson());
   }
 }
