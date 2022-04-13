@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/exceptions/server_exception.dart';
+import '../../../core/exceptions/app_exception.dart';
 import '../../../data/models/pokemon.dart';
 import '../../../data/models/pokemon_list_response.dart';
 import '../../../data/pokemon_repository.dart';
@@ -42,10 +42,11 @@ class PokemonListCubit extends Cubit<PokemonListState> {
   ScrollController get controller => _controller;
 
   Future<void> fetchPokemons() async {
+    emit(state.copyWith(status: const StateStatus.loading()));
     try {
       await _getRemotePokemons();
-    } on ServerException catch (e) {
-      emit(state.copyWith(status: StateStatus.primaryError(e.errorMessage)));
+    } on AppException catch (e) {
+      emit(state.copyWith(status: StateStatus.primaryError(e.message)));
     }
   }
 
@@ -54,8 +55,8 @@ class PokemonListCubit extends Cubit<PokemonListState> {
     print('Fetching for $nextUrl');
     try {
       await _getRemotePokemons(url: nextUrl);
-    } on ServerException catch (e) {
-      emit(state.copyWith(status: StateStatus.secondaryError(e.errorMessage)));
+    } on AppException catch (e) {
+      emit(state.copyWith(status: StateStatus.secondaryError(e.message)));
     }
   }
 

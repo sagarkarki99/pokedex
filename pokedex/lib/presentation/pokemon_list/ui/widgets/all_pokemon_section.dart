@@ -41,7 +41,7 @@ class AllPokemonSection extends StatelessWidget {
             children: [
               Text(message),
               const SizedBox(height: 8.0),
-              MaterialButton(
+              ElevatedButton(
                 onPressed: () =>
                     context.read<PokemonListCubit>().fetchPokemons(),
                 child: const Text('Try Again'),

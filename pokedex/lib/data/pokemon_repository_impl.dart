@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
-
-import '../core/exceptions/server_exception.dart';
+import './../core/extensions/error_extension.dart';
+import '../core/exceptions/app_exception.dart';
 import 'local/database.dart';
 import 'models/pokemon.dart';
 import 'models/pokemon_list_response.dart';
@@ -25,7 +25,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
           .get(url ?? 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=30');
       return PokemonListResponse.fromJson(response.data);
     } on DioError catch (e) {
-      throw ServerException(400, 'Something went wrong!');
+      throw AppException.fromDioError(e);
     }
   }
 
@@ -46,7 +46,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
       if (localPokemon != null) {
         return Pokemon.fromLocalJson(localPokemon);
       }
-      throw ServerException(400, '');
+      throw AppException.fromDioError(e);
     }
   }
 
