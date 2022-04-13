@@ -16,7 +16,7 @@ class DetailAppBar extends StatelessWidget {
         return state.maybeWhen(
           orElse: () => const SizedBox(),
           loaded: (pokemon) => SliverAppBar(
-            expandedHeight: 250,
+            expandedHeight: MediaQuery.of(context).size.height * 0.25,
             floating: true,
             leading: IconButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -26,6 +26,7 @@ class DetailAppBar extends StatelessWidget {
               ),
             ),
             flexibleSpace: FlexibleSpaceBar(
+              centerTitle: false,
               title: Text(
                 pokemon.idString,
                 style: Theme.of(context).textTheme.headline6!.copyWith(

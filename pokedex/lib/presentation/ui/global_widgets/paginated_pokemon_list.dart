@@ -18,51 +18,15 @@ class PaginatedPokemonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildSliverGrid();
-    // return GridView.builder(
-    //     controller: scrollController,
-    //     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-    //     itemCount: pokemons.length,
-    //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    //       crossAxisCount: 3,
-    //       crossAxisSpacing: 12.0,
-    //       mainAxisSpacing: 12.0,
-    //       childAspectRatio: 110 / 186,
-    //     ),
-    //     itemBuilder: (context, index) {
-    //       final pokemon = pokemons[index];
-    //       return PokemonItem(
-    //         onTap: (_) {
-    //           Navigator.push(
-    //             context,
-    //             MaterialPageRoute(
-    //               builder: (context) => PokemonDetailScreen(
-    //                 pokemon: pokemon,
-    //               ),
-    //             ),
-    //           );
-    //         },
-    //         model: PokemonViewModel(
-    //           name: pokemon.name,
-    //           power: pokemon.types.join(','),
-    //           idString: pokemon.idString,
-    //           svgUrl: pokemon.svgUrl,
-    //           id: pokemon.id,
-    //           bgColor: pokemon.getBgColor(),
-    //         ),
-    //       );
-    //     });
-  }
-
-  Widget _buildSliverGrid() {
+    final crossCount = _getCrossCount(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
       child: CustomScrollView(
         controller: scrollController,
         slivers: [
           SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossCount,
               crossAxisSpacing: 12.0,
               mainAxisSpacing: 12.0,
               childAspectRatio: 110 / 186,
@@ -104,4 +68,19 @@ class PaginatedPokemonList extends StatelessWidget {
       ),
     );
   }
+
+  int _getCrossCount(BuildContext context) {
+    final deviceWidth = MediaQuery.of(context).size.width;
+    print(deviceWidth);
+    if (_isTablet(deviceWidth)) {
+      return 5;
+    } else if (isSmallDevice(deviceWidth)) {
+      return 2;
+    }
+    return 3;
+  }
+
+  bool isSmallDevice(double deviceWidth) => deviceWidth <= 400;
+
+  bool _isTablet(double deviceWidth) => deviceWidth >= 800;
 }
