@@ -1,9 +1,8 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../ui.dart';
 import '../../view_models/pokemon_view_model.dart';
+import '../ui.dart';
 
 class PokemonItem extends StatelessWidget {
   final PokemonViewModel model;
@@ -27,7 +26,12 @@ class PokemonItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: PokemonImage(url: model.svgUrl)),
+            Expanded(
+              child: Hero(
+                tag: model.id,
+                child: PokemonImage(url: model.svgUrl),
+              ),
+            ),
             _Description(model: model),
           ],
         ),

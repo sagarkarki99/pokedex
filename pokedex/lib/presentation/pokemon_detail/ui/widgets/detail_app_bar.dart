@@ -42,10 +42,13 @@ class DetailAppBar extends StatelessWidget {
                         horizontal: 16.0, vertical: 12.0),
                     color: pokemon.getBgColor(),
                     alignment: Alignment.bottomRight,
-                    child: PokemonImage(
-                      url: pokemon.svgUrl,
-                      height: 125,
-                      width: 136,
+                    child: Hero(
+                      tag: pokemon.id,
+                      child: PokemonImage(
+                        url: pokemon.svgUrl,
+                        height: 125,
+                        width: 136,
+                      ),
                     ),
                   ),
                   Positioned(

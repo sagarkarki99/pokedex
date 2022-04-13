@@ -26,16 +26,18 @@ class PokemonListCubit extends Cubit<PokemonListState> {
     });
 
     repository.addFavouriteListener((newPokemon) {
-      final index =
-          state.pokemons.indexWhere((poke) => poke.id == newPokemon.id);
-      state.pokemons.removeAt(index);
-      state.pokemons.insert(index, newPokemon);
-      emit(
-        state.copyWith(
-          pokemons: List.of(state.pokemons),
-          status: const StateStatus.loaded(),
-        ),
-      );
+      if (state.pokemons.isNotEmpty) {
+        final index =
+            state.pokemons.indexWhere((poke) => poke.id == newPokemon.id);
+        state.pokemons.removeAt(index);
+        state.pokemons.insert(index, newPokemon);
+        emit(
+          state.copyWith(
+            pokemons: List.of(state.pokemons),
+            status: const StateStatus.loaded(),
+          ),
+        );
+      }
     });
   }
 
