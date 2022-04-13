@@ -17,6 +17,7 @@ class FavouriteButton extends StatelessWidget {
         loaded: (pokemon) => InkWell(
           onTap: () => context.read<PokemonDetailCubit>().toggleFavourite(),
           child: AnimatedContainer(
+            width: pokemon.isFavourite ? 230 : 180,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
             padding: const EdgeInsets.all(16.0),
@@ -59,7 +60,7 @@ class FavouriteButton extends StatelessWidget {
   Text _getMarkText(BuildContext context) {
     return Text(
       'Mark as Favourite',
-      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+      style: Theme.of(context).textTheme.bodyText1!.copyWith(
             color: AppColors.light,
             fontWeight: FontWeight.bold,
           ),
@@ -69,7 +70,9 @@ class FavouriteButton extends StatelessWidget {
   Text _getUnMarkText(BuildContext context) {
     return Text(
       'Remove from Favourites',
-      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+      overflow: TextOverflow.fade,
+      maxLines: 1,
+      style: Theme.of(context).textTheme.bodyText1!.copyWith(
             color: AppColors.primary,
             fontWeight: FontWeight.bold,
           ),

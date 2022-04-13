@@ -221,8 +221,14 @@ class _$StateStatusTearOff {
     return const Loaded();
   }
 
-  Error error(String errorMessage) {
-    return Error(
+  PrimaryError primaryError(String errorMessage) {
+    return PrimaryError(
+      errorMessage,
+    );
+  }
+
+  SecondaryError secondaryError(String errorMessage) {
+    return SecondaryError(
       errorMessage,
     );
   }
@@ -238,7 +244,8 @@ mixin _$StateStatus {
     required TResult Function() loading,
     required TResult Function() fetchingMore,
     required TResult Function() loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(String errorMessage) primaryError,
+    required TResult Function(String errorMessage) secondaryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -246,7 +253,8 @@ mixin _$StateStatus {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -254,7 +262,8 @@ mixin _$StateStatus {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -263,7 +272,8 @@ mixin _$StateStatus {
     required TResult Function(Loading value) loading,
     required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
-    required TResult Function(Error value) error,
+    required TResult Function(PrimaryError value) primaryError,
+    required TResult Function(SecondaryError value) secondaryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -271,7 +281,8 @@ mixin _$StateStatus {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -279,7 +290,8 @@ mixin _$StateStatus {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -342,7 +354,8 @@ class _$Loading implements Loading {
     required TResult Function() loading,
     required TResult Function() fetchingMore,
     required TResult Function() loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(String errorMessage) primaryError,
+    required TResult Function(String errorMessage) secondaryError,
   }) {
     return loading();
   }
@@ -353,7 +366,8 @@ class _$Loading implements Loading {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
   }) {
     return loading?.call();
   }
@@ -364,7 +378,8 @@ class _$Loading implements Loading {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -379,7 +394,8 @@ class _$Loading implements Loading {
     required TResult Function(Loading value) loading,
     required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
-    required TResult Function(Error value) error,
+    required TResult Function(PrimaryError value) primaryError,
+    required TResult Function(SecondaryError value) secondaryError,
   }) {
     return loading(this);
   }
@@ -390,7 +406,8 @@ class _$Loading implements Loading {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
   }) {
     return loading?.call(this);
   }
@@ -401,7 +418,8 @@ class _$Loading implements Loading {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -458,7 +476,8 @@ class _$FetchingMore implements FetchingMore {
     required TResult Function() loading,
     required TResult Function() fetchingMore,
     required TResult Function() loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(String errorMessage) primaryError,
+    required TResult Function(String errorMessage) secondaryError,
   }) {
     return fetchingMore();
   }
@@ -469,7 +488,8 @@ class _$FetchingMore implements FetchingMore {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
   }) {
     return fetchingMore?.call();
   }
@@ -480,7 +500,8 @@ class _$FetchingMore implements FetchingMore {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
     required TResult orElse(),
   }) {
     if (fetchingMore != null) {
@@ -495,7 +516,8 @@ class _$FetchingMore implements FetchingMore {
     required TResult Function(Loading value) loading,
     required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
-    required TResult Function(Error value) error,
+    required TResult Function(PrimaryError value) primaryError,
+    required TResult Function(SecondaryError value) secondaryError,
   }) {
     return fetchingMore(this);
   }
@@ -506,7 +528,8 @@ class _$FetchingMore implements FetchingMore {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
   }) {
     return fetchingMore?.call(this);
   }
@@ -517,7 +540,8 @@ class _$FetchingMore implements FetchingMore {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
     required TResult orElse(),
   }) {
     if (fetchingMore != null) {
@@ -572,7 +596,8 @@ class _$Loaded implements Loaded {
     required TResult Function() loading,
     required TResult Function() fetchingMore,
     required TResult Function() loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(String errorMessage) primaryError,
+    required TResult Function(String errorMessage) secondaryError,
   }) {
     return loaded();
   }
@@ -583,7 +608,8 @@ class _$Loaded implements Loaded {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
   }) {
     return loaded?.call();
   }
@@ -594,7 +620,8 @@ class _$Loaded implements Loaded {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -609,7 +636,8 @@ class _$Loaded implements Loaded {
     required TResult Function(Loading value) loading,
     required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
-    required TResult Function(Error value) error,
+    required TResult Function(PrimaryError value) primaryError,
+    required TResult Function(SecondaryError value) secondaryError,
   }) {
     return loaded(this);
   }
@@ -620,7 +648,8 @@ class _$Loaded implements Loaded {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
   }) {
     return loaded?.call(this);
   }
@@ -631,7 +660,8 @@ class _$Loaded implements Loaded {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -646,26 +676,28 @@ abstract class Loaded implements StateStatus {
 }
 
 /// @nodoc
-abstract class $ErrorCopyWith<$Res> {
-  factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
-      _$ErrorCopyWithImpl<$Res>;
+abstract class $PrimaryErrorCopyWith<$Res> {
+  factory $PrimaryErrorCopyWith(
+          PrimaryError value, $Res Function(PrimaryError) then) =
+      _$PrimaryErrorCopyWithImpl<$Res>;
   $Res call({String errorMessage});
 }
 
 /// @nodoc
-class _$ErrorCopyWithImpl<$Res> extends _$StateStatusCopyWithImpl<$Res>
-    implements $ErrorCopyWith<$Res> {
-  _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
-      : super(_value, (v) => _then(v as Error));
+class _$PrimaryErrorCopyWithImpl<$Res> extends _$StateStatusCopyWithImpl<$Res>
+    implements $PrimaryErrorCopyWith<$Res> {
+  _$PrimaryErrorCopyWithImpl(
+      PrimaryError _value, $Res Function(PrimaryError) _then)
+      : super(_value, (v) => _then(v as PrimaryError));
 
   @override
-  Error get _value => super._value as Error;
+  PrimaryError get _value => super._value as PrimaryError;
 
   @override
   $Res call({
     Object? errorMessage = freezed,
   }) {
-    return _then(Error(
+    return _then(PrimaryError(
       errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -676,22 +708,22 @@ class _$ErrorCopyWithImpl<$Res> extends _$StateStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Error implements Error {
-  const _$Error(this.errorMessage);
+class _$PrimaryError implements PrimaryError {
+  const _$PrimaryError(this.errorMessage);
 
   @override
   final String errorMessage;
 
   @override
   String toString() {
-    return 'StateStatus.error(errorMessage: $errorMessage)';
+    return 'StateStatus.primaryError(errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Error &&
+            other is PrimaryError &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage));
   }
@@ -702,8 +734,8 @@ class _$Error implements Error {
 
   @JsonKey(ignore: true)
   @override
-  $ErrorCopyWith<Error> get copyWith =>
-      _$ErrorCopyWithImpl<Error>(this, _$identity);
+  $PrimaryErrorCopyWith<PrimaryError> get copyWith =>
+      _$PrimaryErrorCopyWithImpl<PrimaryError>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -711,9 +743,10 @@ class _$Error implements Error {
     required TResult Function() loading,
     required TResult Function() fetchingMore,
     required TResult Function() loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(String errorMessage) primaryError,
+    required TResult Function(String errorMessage) secondaryError,
   }) {
-    return error(errorMessage);
+    return primaryError(errorMessage);
   }
 
   @override
@@ -722,9 +755,10 @@ class _$Error implements Error {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
   }) {
-    return error?.call(errorMessage);
+    return primaryError?.call(errorMessage);
   }
 
   @override
@@ -733,11 +767,12 @@ class _$Error implements Error {
     TResult Function()? loading,
     TResult Function()? fetchingMore,
     TResult Function()? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(errorMessage);
+    if (primaryError != null) {
+      return primaryError(errorMessage);
     }
     return orElse();
   }
@@ -748,9 +783,10 @@ class _$Error implements Error {
     required TResult Function(Loading value) loading,
     required TResult Function(FetchingMore value) fetchingMore,
     required TResult Function(Loaded value) loaded,
-    required TResult Function(Error value) error,
+    required TResult Function(PrimaryError value) primaryError,
+    required TResult Function(SecondaryError value) secondaryError,
   }) {
-    return error(this);
+    return primaryError(this);
   }
 
   @override
@@ -759,9 +795,10 @@ class _$Error implements Error {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
   }) {
-    return error?.call(this);
+    return primaryError?.call(this);
   }
 
   @override
@@ -770,20 +807,174 @@ class _$Error implements Error {
     TResult Function(Loading value)? loading,
     TResult Function(FetchingMore value)? fetchingMore,
     TResult Function(Loaded value)? loaded,
-    TResult Function(Error value)? error,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (primaryError != null) {
+      return primaryError(this);
     }
     return orElse();
   }
 }
 
-abstract class Error implements StateStatus {
-  const factory Error(String errorMessage) = _$Error;
+abstract class PrimaryError implements StateStatus {
+  const factory PrimaryError(String errorMessage) = _$PrimaryError;
 
   String get errorMessage;
   @JsonKey(ignore: true)
-  $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
+  $PrimaryErrorCopyWith<PrimaryError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SecondaryErrorCopyWith<$Res> {
+  factory $SecondaryErrorCopyWith(
+          SecondaryError value, $Res Function(SecondaryError) then) =
+      _$SecondaryErrorCopyWithImpl<$Res>;
+  $Res call({String errorMessage});
+}
+
+/// @nodoc
+class _$SecondaryErrorCopyWithImpl<$Res> extends _$StateStatusCopyWithImpl<$Res>
+    implements $SecondaryErrorCopyWith<$Res> {
+  _$SecondaryErrorCopyWithImpl(
+      SecondaryError _value, $Res Function(SecondaryError) _then)
+      : super(_value, (v) => _then(v as SecondaryError));
+
+  @override
+  SecondaryError get _value => super._value as SecondaryError;
+
+  @override
+  $Res call({
+    Object? errorMessage = freezed,
+  }) {
+    return _then(SecondaryError(
+      errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SecondaryError implements SecondaryError {
+  const _$SecondaryError(this.errorMessage);
+
+  @override
+  final String errorMessage;
+
+  @override
+  String toString() {
+    return 'StateStatus.secondaryError(errorMessage: $errorMessage)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SecondaryError &&
+            const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(errorMessage));
+
+  @JsonKey(ignore: true)
+  @override
+  $SecondaryErrorCopyWith<SecondaryError> get copyWith =>
+      _$SecondaryErrorCopyWithImpl<SecondaryError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() fetchingMore,
+    required TResult Function() loaded,
+    required TResult Function(String errorMessage) primaryError,
+    required TResult Function(String errorMessage) secondaryError,
+  }) {
+    return secondaryError(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? fetchingMore,
+    TResult Function()? loaded,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
+  }) {
+    return secondaryError?.call(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? fetchingMore,
+    TResult Function()? loaded,
+    TResult Function(String errorMessage)? primaryError,
+    TResult Function(String errorMessage)? secondaryError,
+    required TResult orElse(),
+  }) {
+    if (secondaryError != null) {
+      return secondaryError(errorMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Loading value) loading,
+    required TResult Function(FetchingMore value) fetchingMore,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(PrimaryError value) primaryError,
+    required TResult Function(SecondaryError value) secondaryError,
+  }) {
+    return secondaryError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
+  }) {
+    return secondaryError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(FetchingMore value)? fetchingMore,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(PrimaryError value)? primaryError,
+    TResult Function(SecondaryError value)? secondaryError,
+    required TResult orElse(),
+  }) {
+    if (secondaryError != null) {
+      return secondaryError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SecondaryError implements StateStatus {
+  const factory SecondaryError(String errorMessage) = _$SecondaryError;
+
+  String get errorMessage;
+  @JsonKey(ignore: true)
+  $SecondaryErrorCopyWith<SecondaryError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

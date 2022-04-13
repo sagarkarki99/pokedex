@@ -45,16 +45,17 @@ class PokemonListCubit extends Cubit<PokemonListState> {
     try {
       await _getRemotePokemons();
     } on ServerException catch (e) {
-      emit(state.copyWith(status: StateStatus.error(e.errorMessage)));
+      emit(state.copyWith(status: StateStatus.primaryError(e.errorMessage)));
     }
   }
 
   Future<void> _fetchMorePokemons(String? nextUrl) async {
     emit(state.copyWith(status: const StateStatus.fetchingMore()));
+    print('Fetching for $nextUrl');
     try {
       await _getRemotePokemons(url: nextUrl);
     } on ServerException catch (e) {
-      emit(state.copyWith(status: StateStatus.error(e.errorMessage)));
+      emit(state.copyWith(status: StateStatus.secondaryError(e.errorMessage)));
     }
   }
 

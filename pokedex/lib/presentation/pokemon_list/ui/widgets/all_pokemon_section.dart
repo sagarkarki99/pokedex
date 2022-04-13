@@ -9,7 +9,15 @@ class AllPokemonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PokemonListCubit, PokemonListState>(
+    return BlocConsumer<PokemonListCubit, PokemonListState>(
+      listener: (context, state) => state.status.maybeWhen(
+        orElse: () {},
+        secondaryError: (message) => ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(message),
+          ),
+        ),
+      ),
       builder: (context, state) => state.status.maybeWhen(
         loading: () => const Center(
           child: CircularProgressIndicator(),
@@ -23,7 +31,20 @@ class AllPokemonSection extends StatelessWidget {
             scrollController: context.read<PokemonListCubit>().controller,
           );
         },
-        error: (message) => const SizedBox(),
+        primaryError: (message) => Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(message),
+              const SizedBox(height: 8.0),
+              MaterialButton(
+                onPressed: () =>
+                    context.read<PokemonListCubit>().fetchPokemons(),
+                child: const Text('Try Again'),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

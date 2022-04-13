@@ -34,8 +34,8 @@ class _PokemonDetailBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CustomScrollView(
+    return Scaffold(
+      body: const CustomScrollView(
         slivers: [
           DetailAppBar(),
           SliverToBoxAdapter(
@@ -49,7 +49,10 @@ class _PokemonDetailBody extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FavouriteButton(),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [FavouriteButton(), SizedBox(height: 18.0)],
+      ),
     );
   }
 }

@@ -14,5 +14,7 @@ class StateStatus with _$StateStatus {
   const factory StateStatus.loading() = Loading;
   const factory StateStatus.fetchingMore() = FetchingMore;
   const factory StateStatus.loaded() = Loaded;
-  const factory StateStatus.error(String errorMessage) = Error;
+  const factory StateStatus.primaryError(String errorMessage) = PrimaryError;
+  const factory StateStatus.secondaryError(String errorMessage) =
+      SecondaryError;
 }
